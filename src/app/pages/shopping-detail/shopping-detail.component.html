@@ -1,0 +1,50 @@
+<div class="shopping-cart">
+    <div class="shopping-cart__products">
+        <div [ngStyle]="{'font-weight': '500'}">
+            <h2>Carro({{cartLength}})</h2>
+        </div>
+        <ng-container *ngIf="cartList.length > 0 else empty ">
+            <mat-card class="shopping-cart__products-card" *ngFor="let item of cartList">
+                <mat-checkbox color="primary"></mat-checkbox>
+                <img mat-card-image width="120" src="https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg" alt="imagen">
+                <mat-card-content class="mat-card-content">
+                    <h5>{{item.name}}</h5>
+                    <p><strong>{{item.price | currency}}</strong></p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <div class="contador_form">
+                        <button (click)="decreaseQuantity(item)" class="color-primary">
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                        <label class="contador__label">{{item.quantity}}</label>
+                        <button class="color-primary" (click)="increaseQuantity(item)">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+                </mat-card-actions>
+            </mat-card>
+        </ng-container>
+        <ng-template #empty>
+            <p>Aun no hay productos</p>
+        </ng-template>
+    </div>
+    <div class="shopping-cart__summary">
+        <h2>Resumen de la orden</h2>
+        <mat-card class="shopping-cart__summary-card">
+            <mat-card-content>
+                <a routerLink="/">Continuar comprando</a>
+                <div class="price-content">
+                    <p>Productos ({{cartLength}})</p>
+                    <p>{{ total | currency}}</p>
+                </div>
+                <div class="total-content">
+                    <p>Total</p>
+                    <p><strong>{{ total | currency}}</strong></p>
+                </div>
+            </mat-card-content>
+            <mat-card-actions class="mat-card-action">
+                <button mat-button class="btn-shopping">Comprar</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

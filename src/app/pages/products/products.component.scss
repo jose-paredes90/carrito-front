@@ -1,0 +1,33 @@
+.products {
+    flex-wrap: wrap;
+    display: flex;
+    padding: 25px;
+    gap: 3px;
+
+    &__card {
+        width: 240px;
+        margin: 20px 16px;
+        border-radius: 8px;
+
+        &-img {
+            justify-content: center;
+            display: flex;
+
+            &:hover {
+                transition: 0.3s ease-in-out;
+                transform: scale(1.1);
+            }
+        }
+
+        &-btn {
+            .shopping-btn {
+                background-color: #ec4a13;
+                width: 220px;
+                border-radius: 20px;
+                margin: 20px 0;
+                color: white;
+                font-size: 18px;
+            }
+        }
+    }
+}

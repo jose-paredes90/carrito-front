@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+    <div class="title">
+        <strong style="font-size: 30px;">APP STORE</strong>
+        <button mat-button routerLink="cart">
+            <mat-icon 
+                class="mat-icon" 
+                [matBadge]="cartLength" 
+                matBadgeColor="warn"
+                > shopping_cart
+            </mat-icon>
+        </button>
+    </div>
+</mat-toolbar>

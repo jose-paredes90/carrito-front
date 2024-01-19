@@ -1,0 +1,15 @@
+<div class="products">
+    <mat-card class="products__card" *ngFor="let product of productList">
+        <div class="products__card-img">
+            <img mat-card-image width="200"
+            src="https://rukminim1.flixcart.com/flap/128/128/image/69c6589653afdb9a.png?q=100" alt="imagen">
+        </div>
+        <mat-card-content>
+            <h3>{{product.name}}</h3>
+            <p><strong>{{ product.price | currency}}</strong> </p>
+        </mat-card-content>
+        <mat-card-actions class="products__card-btn">
+            <button mat-button class="shopping-btn" (click)="addProduct(product)">Agregar al carrito</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
