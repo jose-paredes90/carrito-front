@@ -10,15 +10,19 @@ import { PagesRoutingModule } from './pages/pages.routing';
 import { ProductsService } from './services/products.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common'
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShoppingService } from './services/shopping-detail.service';
+import { AuthRoutingModule } from './auth/auth.routing';
+import { PasswordValidationService } from './services/password-validation.service';
+import { SignupService } from './auth/services/user.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    LoadingComponent
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,11 +30,13 @@ import { ShoppingService } from './services/shopping-detail.service';
     AppRoutingModule,
     MaterialModule,
     PagesRoutingModule,
+    ReactiveFormsModule,
     HttpClientModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    AuthRoutingModule
   ],
-  providers: [ProductsService, ShoppingService],
+  providers: [ProductsService, ShoppingService, PasswordValidationService, SignupService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

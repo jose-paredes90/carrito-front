@@ -2,15 +2,15 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ProductsDto } from "../pages/products/models/products.dto";
 import { environment } from "src/environment/environment";
-import { ShoppingDetailDto } from "../pages/shopping-detail/models/shopping-detail.dto";
+import { CartDetailDto } from "../pages/shopping-detail/models/cart-detail.dto";
 import { BehaviorSubject } from "rxjs";
 
 @Injectable()
 export class ProductsService {
-  public cart: ShoppingDetailDto[] = [];
+  public cart: CartDetailDto[] = [];
   // private totalSubject = new BehaviorSubject<number>(0);
   // total$ = this.totalSubject.asObservable();
-  public cartSubject = new BehaviorSubject<ShoppingDetailDto[]>([]);
+  public cartSubject = new BehaviorSubject<CartDetailDto[]>([]);
 
   constructor(private http: HttpClient) {
     const detalle = JSON.parse(localStorage.getItem("detalle") || null);
@@ -19,7 +19,7 @@ export class ProductsService {
   }
 
   getProducts() {
-    let path = environment.api_products;
+    let path = `${environment.api_products}/products`;
 
     return this.http.get<ProductsDto[]>(path)
   }
@@ -29,7 +29,7 @@ export class ProductsService {
     if (existingProduct) {
       existingProduct.quantity++;
     } else {
-      const newProduct: ShoppingDetailDto = {
+      const newProduct: CartDetailDto = {
         id: product._id,
         name: product.name,
         price: product.price,

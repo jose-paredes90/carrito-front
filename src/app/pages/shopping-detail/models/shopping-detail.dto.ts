@@ -1,6 +1,6 @@
-export class ShoppingDetailDto {
-    id?: string;
-    name?: string;
-    price?: number;
-    quantity?: number;
+export class ShoppingDetailDTO {
+    id: number;
+    productId: string;
+    quantity: number;
+    price: number;
 }

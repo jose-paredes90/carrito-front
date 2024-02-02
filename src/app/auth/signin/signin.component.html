@@ -1,0 +1,28 @@
+<div mat-dialog-content>
+  <form [formGroup]="loginForm" class="signin-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="username">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password">
+      <button mat-icon-button matSuffix (click)="onToggleVisibility()" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>
+          {{hide ? 'visibility_off' : 'visibility'}}
+        </mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <div>
+    <button type="submit" mat-raised-button color="primary" class="btn-login" 
+      >Ingresar</button>
+  </div>
+  <span class="margin-top">Si no esta logeado registrarse
+    <a class="sign-up-link" [routerLink]="'signup'" (click)="cerrarDialog()">Registrarse
+    </a>
+  </span>
+</div>
