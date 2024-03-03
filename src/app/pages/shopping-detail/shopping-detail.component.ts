@@ -5,6 +5,7 @@ import { ShoppingCreateDto } from './models/shopping-create.dto';
 import { ShoppingService } from 'src/app/services/shopping-detail.service';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ShoppingDetailCreateDto } from './models/shopping-detail-create.dto';
+import { LoginService } from 'src/app/auth/services/user.service';
 
 @Component({
   selector: 'app-shopping-detail',
@@ -22,10 +23,12 @@ export class ShoppingDetailComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   constructor(private carritoService: ProductsService,
+    private loginService: LoginService,
     private shoppingService: ShoppingService,
     private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    
     this.carritoService.cartSubject.subscribe(detalle => {
       this.cartList = detalle;
     });
@@ -36,7 +39,9 @@ export class ShoppingDetailComponent implements OnInit {
 
 
   saveShopping() {
-    const customerId = '659f24ad4518a25754f6dbc4';
+    const tokendata = this.loginService.token;
+    const customerId = tokendata.datos.id;
+    console.log(customerId);
     const shopping: ShoppingCreateDto = {
       customerId: customerId,
       date: new Date(),
@@ -46,7 +51,7 @@ export class ShoppingDetailComponent implements OnInit {
           price: detalle.price,
           quantity: detalle.quantity
         } as ShoppingDetailCreateDto;
-      }) 
+      })
     };
 
     this.shoppingService.saveShopping(shopping).subscribe({
@@ -56,9 +61,7 @@ export class ShoppingDetailComponent implements OnInit {
           verticalPosition: this.verticalPosition,
         });
 
-        this.carritoService.cartSubject.next([]);
-        this.carritoService.cart = [];
-        localStorage.removeItem('detalle');
+        this.clearCart();
       },
       error: () => {
         this._snackBar.open('Error al guardar la compra', 'Aceptar', {
@@ -69,6 +72,11 @@ export class ShoppingDetailComponent implements OnInit {
     });
   }
 
+  clearCart() {
+    this.carritoService.cartSubject.next([]);
+    this.carritoService.cart = [];
+    localStorage.removeItem('detalle');
+  }
 
 
   public get cartLength(): number {

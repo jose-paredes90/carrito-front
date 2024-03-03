@@ -15,8 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShoppingService } from './services/shopping-detail.service';
 import { AuthRoutingModule } from './auth/auth.routing';
 import { PasswordValidationService } from './services/password-validation.service';
-import { SignupService } from './auth/services/user.service';
-
+import { LoginService } from './auth/services/user.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +35,7 @@ import { SignupService } from './auth/services/user.service';
     FormsModule,
     AuthRoutingModule
   ],
-  providers: [ProductsService, ShoppingService, PasswordValidationService, SignupService],
+  providers: [ProductsService, ShoppingService, PasswordValidationService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

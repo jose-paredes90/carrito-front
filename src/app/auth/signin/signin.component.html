@@ -2,7 +2,7 @@
   <form [formGroup]="loginForm" class="signin-form">
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
-      <input matInput formControlName="username">
+      <input matInput formControlName="email">
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>Password</mat-label>
@@ -19,7 +19,7 @@
 <div mat-dialog-actions>
   <div>
     <button type="submit" mat-raised-button color="primary" class="btn-login" 
-      >Ingresar</button>
+      (click)="login()">Ingresar</button>
   </div>
   <span class="margin-top">Si no esta logeado registrarse
     <a class="sign-up-link" [routerLink]="'signup'" (click)="cerrarDialog()">Registrarse

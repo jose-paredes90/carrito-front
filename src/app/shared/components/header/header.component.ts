@@ -22,4 +22,8 @@ export class HeaderComponent {
     });
     dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
   }
+
+  backHome() {
+    this.router.navigate(['products']);
+  }
 }

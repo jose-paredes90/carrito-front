@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PasswordValidationService } from 'src/app/services/password-validation.service';
-import { SignupService } from '../services/user.service';
+import { LoginService } from '../services/user.service';
 import { UserCreateDto } from './models/user-create.dto';
 import { Router } from '@angular/router';
 
@@ -14,7 +14,7 @@ export class SignupComponent {
   signUpForm: FormGroup;
 
   constructor(private passwordValidationService: PasswordValidationService,
-    private signupService: SignupService, private router: Router
+    private loginService: LoginService, private router: Router
   ) {
     this.signUpForm = new FormGroup({
       username: new FormControl('', [
@@ -63,7 +63,7 @@ export class SignupComponent {
         country: formValue.country,
         password: formValue.password,
       };
-      this.signupService.createUser(userRequest)
+      this.loginService.createUser(userRequest)
         .subscribe({
           next: (response) => {
             console.log('Usuario creado con éxito', response);

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { SignupService } from '../services/user.service';
-// import { LoginDto } from './models/login.dto';
-// import { TokenResponse } from './models/token-response.dto';
+import { LoginService } from '../services/user.service';
+import { LoginDto } from './models/login.dto';
+import { TokenResponse } from './models/token-response.dto';
 
 @Component({
   selector: 'app-signin',
@@ -14,11 +14,10 @@ export class SigninComponent {
   hide = true;
   loginForm: FormGroup;
   constructor(private dialogRef: MatDialogRef<SigninComponent>,
-    private signupService: SignupService) {
+    private loginService: LoginService) {
     this.loginForm = new FormGroup({
-      username: new FormControl('', [
+      email: new FormControl('', [
         Validators.required,
-        Validators.maxLength(6),
         Validators.email
       ]),
       password: new FormControl('', [
@@ -37,57 +36,29 @@ export class SigninComponent {
     this.dialogRef.close();
   }
 
-//   onSumbmit() {
-//     const loginData = this.loginForm.value;
-//     const storedEmail = localStorage.getItem('email');
-//     const storedPassword = localStorage.getItem('password');
-//     // const login: LoginDto = {
-//     //   email: loginData.email,
-//     //   password: loginData.password,
-//     // }
-//     // this.signupService.login(login).subscribe(
-//     //   (response: TokenResponse) => {
-//     //     console.log(response.token);
-//     //     //{
-//     //     // next: (response: TokenResponse) => {
-//     //     //   console.log('Login exitoso', response);
+  login() {
+    const loginData = this.loginForm.value;
+    console.log(loginData);
+    const login: LoginDto = {
+      email: loginData.email,
+      password: loginData.password,
+    }
+    this.loginService.login(login).subscribe({
 
-//     //     //   // Almacenar el token en el localStorage
-//     //     //   localStorage.setItem('currentUserToken', response.token);
+      next: (response: TokenResponse) => {
+        console.log('Login exitoso', response);
 
-//     //     //   // Cerrar el modal después de obtener el token
-//     //     //   this.dialogRef.close();
-//     //     // },
-//     //     // error: (loginError) => {
-//     //     //   console.error('Error en el login', loginError);
-//     //     //   // Puedes manejar el error aquí si es necesario
-//     //     // }
-//     //     //}
-//     //   }
-//     // );
-//     // Verifica si las credenciales están presentes en el localStorage
-// if (storedEmail && storedPassword) {
-//   const loginData: LoginDto = {
-//     email: storedEmail,
-//     password: storedPassword,
-//   };
+        // Almacenar el token en el localStorage
+        localStorage.setItem('token', response.token);
 
-//   this.signupService.login(loginData).subscribe({
-//     next: (response) => {
-//       console.log('Inicio de sesión exitoso', response);
-
-//       // Almacena el token en el localStorage
-//       localStorage.setItem('currentUserToken', response.token);
-
-//       // Puedes realizar otras acciones después del inicio de sesión exitoso
-//     },
-//     error: (loginError) => {
-//       console.error('Error en el inicio de sesión', loginError);
-//       // Puedes manejar el error aquí si es necesario
-//     }
-//   });
-// }
-
-//   }
+        // Cerrar el modal después de obtener el token
+        this.dialogRef.close();
+      },
+      error: (loginError) => {
+        console.error('Error en el login', loginError);
+        // Puedes manejar el error aquí si es necesario
+      }
+    });
+  }
 }
 

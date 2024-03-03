@@ -1,11 +1,12 @@
 <mat-toolbar color="primary">
     <div class="title">
-        <strong style="font-size: 30px;">APP STORE</strong>
-        <div>
-            <button mat-button [matMenuTriggerFor]="menu" #menuTrigger>Menu</button>
+        <strong class="home" (click)="backHome()">APP STORE</strong>
+        <div *ngIf="isLoggedIn"> 
+            <button mat-button [matMenuTriggerFor]="menu" #menuTrigger>menu</button>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="openDialog()">Inicia sesion</button>
                 <button mat-menu-item *ngIf="isLoggedIn" >log out</button>
+                <button mat-menu-item routerLink="account">Account</button>
             </mat-menu>
             <button mat-button routerLink="cart">
                 <mat-icon class="mat-icon" [matBadge]="cartLength" matBadgeColor="warn"> shopping_cart
